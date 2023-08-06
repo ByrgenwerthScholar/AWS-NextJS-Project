@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { User } from '../../../types';
+import { Coach } from '../../../types';
 import { get, getById, post } from './db';
 
 const router = express.Router();
@@ -18,7 +18,7 @@ router.post('/', async (req: Request, res: Response) => {
   console.log(req.body);
   try {
     if (req.body.name) {
-      return res.status(200).send(await post(req.body as User));
+      return res.status(200).send(await post(req.body as Coach));
     }
     throw new Error();
   } catch (e) {

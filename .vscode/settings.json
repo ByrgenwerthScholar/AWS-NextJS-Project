@@ -2,5 +2,11 @@
     "eslint.workingDirectories": [
         "./client",
         "./server"
+    ],
+    "cSpell.words": [
+        "signup"
+    ],
+    "cSpell.ignoreWords": [
+        "mjaqttr"
     ]
 }
