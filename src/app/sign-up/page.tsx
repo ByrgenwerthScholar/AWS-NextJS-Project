@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 // import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import axios from 'axios';
 import UserPool from './UserPool';
-import { User, Coach } from '../../../../types';
+import { User, Coach } from '../types/accounts';
 
 const SignUp = () => {
   const [user, setUser] = useState<User>({
@@ -70,9 +70,9 @@ const SignUp = () => {
   };
 
   return (
-    <div>
+    <main>
       <h1>Sign Up as a Student</h1>
-      <form onSubmit={onSubmitAsUser}>
+      {/* <form onSubmit={onSubmitAsUser}>
         <label htmlFor="email">Email</label>
         <input
           value={user.name}
@@ -87,10 +87,10 @@ const SignUp = () => {
         ></input>
 
         <button type="submit">Sign Up</button>
-      </form>
+      </form> */}
 
       <h1>Sign Up as a Coach</h1>
-      <form onSubmit={onSubmitAsCoach}>
+      {/* <form onSubmit={onSubmitAsCoach}>
         <label htmlFor="email">Email</label>
         <input
           value={coach.name}
@@ -103,8 +103,8 @@ const SignUp = () => {
         ></input>
 
         <button type="submit">Sign Up</button>
-      </form>
-    </div>
+      </form> */}
+    </main>
   );
 };
 
