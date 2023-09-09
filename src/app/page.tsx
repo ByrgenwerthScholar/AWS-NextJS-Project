@@ -1,11 +1,13 @@
-import { Inter } from 'next/font/google'
-const inter = Inter({ subsets: ['latin'] })
+import { Inter } from 'next/font/google';
+const inter = Inter({ subsets: ['latin'] });
+import { redirect } from 'next/navigation';
 
+export default async function Home() {
+  redirect('/main');
 
-export default function Home() {
   return (
     <main className={inter.className}>
       
     </main>
-  )
+  );
 }
