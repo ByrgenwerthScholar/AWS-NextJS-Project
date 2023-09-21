@@ -1,4 +1,8 @@
 import React from "react";
+import DropdownLogin from "./Login";
+
+
+
 
 export default function Navbar() {
   return (
@@ -13,8 +17,9 @@ export default function Navbar() {
         </button>
       </div>
 
-        <div>
-          <a href="/st-sign-up" className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Sign Up</a>
+        <div className="flex flex-wrap gap-3">
+          <a href="/auth/st-sign-up" className="inline-flex items-center justify-center px-4 py-2 border-2 rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Sign Up</a>
+          <DropdownLogin />
         </div>
 
     </nav>

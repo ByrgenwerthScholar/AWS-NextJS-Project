@@ -1,5 +1,5 @@
 import { API, Hub } from 'aws-amplify';
-import { createStudent } from '../src/graphql/mutations';
+import { createStudent } from '../../graphql/mutations';
 
 export const listenToAuthSignInEvent = async (setMyState: (value: boolean) => void) => {
 

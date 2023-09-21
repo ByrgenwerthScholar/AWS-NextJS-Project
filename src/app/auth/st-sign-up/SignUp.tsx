@@ -1,14 +1,15 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import { Amplify, Auth } from 'aws-amplify';
 import { useRouter } from 'next/navigation';
-import awsconfig from '../../aws-exports';
-import {  listenToAuthSignInEvent } from '../../../lib/listenToAuthSignInEvent';
+import {  listenToAuthSignInEvent } from '../../lib/listenToAuthSignInEvent';
+
+import { Amplify, Auth } from 'aws-amplify';
+import awsconfig from '../../../aws-exports';
+
+Amplify.configure(awsconfig);
 
 export default function SignUp() {
-  Amplify.configure(awsconfig);
-  Auth.configure(awsconfig);
 
   const [FormData, setFormData] = useState({
     username: '',
@@ -33,7 +34,7 @@ export default function SignUp() {
 
     try {
       var user = await Auth.signUp({
-        username: FormData.email, 
+        username: FormData.name, 
         password: FormData.password,
         attributes: {
           email: FormData.email,
@@ -53,18 +54,6 @@ export default function SignUp() {
       console.log('error signing up:', error);
     }
   };
-
-  // const handleConfirmation = async (e:React.FormEvent<HTMLFormElement>) => {
-  //     e.preventDefault();
-
-  //     try {
-  //       await Auth.confirmSignUp(FormData.username, FormData.confirmationCode);
-  //       setConfirmed(true);
-  //     } catch (error) {
-  //       console.log('error confirming sign up', error);
-  //     }
-
-  // }
 
   const validateEmail = (value:string) => value.match(emailPattern);
   const validatePassword = (value:string) => value.match(passwordPattern);
@@ -100,7 +89,7 @@ export default function SignUp() {
             }>
             <div className="flex w-full flex-col md:flex-nowrap mb-6 gap-1">
               <label htmlFor="name" className="text-xs text-white block mb-1">
-                Name
+                Username
               </label>
               <input
                 id="name"
@@ -176,6 +165,8 @@ export default function SignUp() {
                       d="M6 6l12 12M6 18L18 6"/>
                 </svg>}
               </div>
+              {(passwordValidation === 'invalid') ?
+                <span className='text-xs text-yellow-200'>Password must be at least 8 characters long, contain at least one number, one uppercase letter, and one special character.</span> : null}
             </div>
             <button className='align-centre text-white border rounded-lg p-2 hover:bg-white hover:text-hippie_pink' disabled={ !(emailValidation === "valid") && !(passwordValidation === "valid") } type="submit">
               { (signedUp === 'invalid') ? 'Sign Up' : (signedUp === 'valid') ? 
@@ -194,30 +185,5 @@ export default function SignUp() {
         </div>
       </main>
     );
-          }
-  // } else if (!confirmed) {
-  //   return (
-  //     <main className="min-h-screen flex items-center justify-center bg-background text-text">
-  //       <div className="p-8 bg-hippie_pink rounded shadow-sm w-96 flex flex-col gap-4">
-  //         <h1 className="text-2xl text-white font-semibold mb-4">Confirm your email</h1>
-  //         <form onSubmit={ handleConfirmation }>
-  //           <div className="flex w-full flex-wrap md:flex-nowrap mb-6 gap-4">
-  //             <input
-  //               id="confirmationCode"
-  //               className="w-full text-sm text-white bg-transparent border-b border-t-0 border-l-0 border-r-0 border-white placeholder-white py-1 focus:outline-none focus:border-apricot"
-  //               value={FormData.confirmationCode}
-  //               onChange={(e) => setFormData({ ...FormData, confirmationCode: e.target.value })}
-  //               required/>
-  //           </div>
-  //           <button type="submit" className='align-centre text-white border rounded-lg p-2 hover:bg-white hover:text-hippie_pink'>
-  //             Confirm
-  //           </button>
-  //         </form>
-  //       </div>
-  //     </main>
-  //   );
-  // } 
-  else {
-    router.push('/main')
-  }
+  };
 };

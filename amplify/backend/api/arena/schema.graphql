@@ -1,11 +1,12 @@
-type Student @model @auth(rules: [{ allow: owner, provider: userPools }]) {
+type Student @model @auth(rules: [{ allow: owner, provider: userPools}]) {
   id: ID!
   name: String!
   coachSub: [Coach] @hasMany(indexName: "byCoach", fields: ["name"])
 }
 
-type Coach @model @auth(rules: [{ allow: owner, provider: userPools }]) {
+type Coach @model @auth(rules: [{ allow: owner, provider: userPools}]) {
   id: ID!
   name: String! @index(name: "byCoach")
   subs: Int!
 }
+

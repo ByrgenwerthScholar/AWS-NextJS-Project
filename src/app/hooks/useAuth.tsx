@@ -1,6 +1,7 @@
+"use client"
+
 import { useState, useEffect } from 'react';
 import { Auth } from 'aws-amplify';
-import awsconfig from '../../aws-exports';
 
 type User = {
   name : string,
@@ -9,24 +10,34 @@ type User = {
   email_verified: boolean,
 };
 
+
 function useAuth() {
-  Auth.configure(awsconfig);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<User | null | undefined>(undefined);
 
   useEffect(() => {
+    let isMounted = true; // Flag to check if component is mounted
+
     async function checkAuthenticationStatus(): Promise<void> {
       try {
         const currentUser = await Auth.currentAuthenticatedUser();
-        setIsAuthenticated(true);
-        setUser(currentUser.attributes);
+        if (isMounted) {
+          setIsAuthenticated(true);
+          setUser(currentUser.attributes);
+        }
       } catch (error) {
-        setIsAuthenticated(false);
-        setUser(null);
+        if (isMounted) {
+          setIsAuthenticated(false);
+          setUser(null);
+        }
       }
     }
 
     checkAuthenticationStatus();
+
+    return () => {
+      isMounted = false; // Cleanup: Mark component as unmounted
+    };
   }, []);
 
   return { isAuthenticated, user };

@@ -7,17 +7,24 @@
             "UserPoolId"
           ],
           "category": "auth",
-          "resourceName": "Arena"
+          "resourceName": "arena303e58cf"
         }
       ],
       "output": {
         "authConfig": {
-          "additionalAuthenticationProviders": [],
-          "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authArena"
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "autharena303e58cf"
+              }
             }
+          ],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
+            },
+            "authenticationType": "API_KEY"
           }
         }
       },
@@ -26,36 +33,46 @@
     }
   },
   "auth": {
-    "Arena": {
+    "arena303e58cf": {
       "customAuth": false,
       "dependsOn": [],
-      "frontendAuthConfig": {
-        "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyCharacters": [
-            "REQUIRES_LOWERCASE",
-            "REQUIRES_NUMBERS",
-            "REQUIRES_SYMBOLS",
-            "REQUIRES_UPPERCASE"
-          ],
-          "passwordPolicyMinLength": 8
-        },
-        "signupAttributes": [
-          "NICKNAME"
-        ],
-        "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
-        "verificationMechanisms": [
-          "EMAIL"
-        ]
-      },
       "providerPlugin": "awscloudformation",
-      "service": "Cognito"
+      "service": "Cognito",
+      "serviceType": "imported"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_auth_arena303e58cf_nativeClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "arena303e58cf"
+        }
+      ]
+    },
+    "AMPLIFY_auth_arena303e58cf_userPoolId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "arena303e58cf"
+        }
+      ]
+    },
+    "AMPLIFY_auth_arena303e58cf_userPoolName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "arena303e58cf"
+        }
+      ]
+    },
+    "AMPLIFY_auth_arena303e58cf_webClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "arena303e58cf"
+        }
+      ]
     }
   }
 }

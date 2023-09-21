@@ -9,7 +9,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'mw': ['Merriweather']
+        'poppins': ['Poppins'],
+        'mw': ['Merriweather'],
       },
       colors: { 
         danger: '#f44336',
