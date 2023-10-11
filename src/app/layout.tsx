@@ -1,5 +1,8 @@
 import './globals.css'
-import Navbar from './components/Nav'
+import Navbar from './components/Nav Bar/Nav'
+import { AuthProvider } from './hooks/clientAuth'
+import ConfigureAmplifyClientSide from './lib/ConfigureAmplifyClientSide';
+
 
 
 export default function RootLayout({
@@ -12,8 +15,11 @@ export default function RootLayout({
     <head>
     </head>
       <body className='font-poppins'>
-          <Navbar />
+        <ConfigureAmplifyClientSide />
+        <AuthProvider>
+         <Navbar />
           {children}
+        </AuthProvider>
       </body>
     </html>
   )

@@ -2,31 +2,28 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Amplify, Auth } from 'aws-amplify';
-import awsconfig from '../../aws-exports';
-
-Amplify.configure({ ...awsconfig, ssr: true });
+import { useAuth } from '../../hooks/clientAuth';
+import { signIn } from 'aws-amplify/auth';
 
 const DropdownLogin = () => {
   const router = useRouter();
+  const auth = useAuth();
 
  // const [confirmSignIn, setConfirmSignIn] = useState<boolean>(false); 
   const [showForm, setShowForm] = useState(false);
   const [FormData, setFormData] = useState({
-    email: '',
+    username: '',
     password: '',
   });
 
   const handleLogin = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    const username = FormData.username;
+    const password = FormData.password;
     try {
-      await Auth.signIn(FormData.email, FormData.password);
-      if (window.location.pathname === '/main') {
-        router.refresh();
-      } else {
-        router.push('/dashboard');
-      }
+      await signIn({ username, password });
+      await auth?.login({ username, FormData });
+      window.location.href = '/dashboard';
     } catch (error) {
       console.log('Error signing in:', error);
     } 
@@ -48,14 +45,14 @@ const DropdownLogin = () => {
           }}>
             <div className="flex w-full flex-col md:flex-nowrap mb-6 gap-1">
               <label htmlFor="email" className="text-xs text-white block mb-1">
-                Email
+                Username
               </label>
               <div className='flex border-b border-t-0 border-l-0 border-r-0'>
                 <input
                   id="email"
                   className="w-full text-sm text-white bg-transparent border-white placeholder-white py-1 focus:outline-none focus:border-apricot"
-                  onChange={(e) => setFormData({ ...FormData, email: e.target.value })}
-                  value={FormData.email}
+                  onChange={(e) => setFormData({ ...FormData, username: e.target.value })}
+                  value={FormData.username}
                   required/>
               </div>
             </div>

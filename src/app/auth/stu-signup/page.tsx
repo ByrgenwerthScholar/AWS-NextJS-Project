@@ -2,12 +2,10 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import {  listenToAuthSignInEvent } from '../../lib/listenToAuthSignInEvent';
+// import {  listenToAuthSignInEvent } from '../../lib/listenToAuthSignInEvent';
 
-import { Amplify, Auth } from 'aws-amplify';
-import awsconfig from '../../../aws-exports';
+import { signUp } from 'aws-amplify/auth';
 
-Amplify.configure(awsconfig);
 
 export default function SignUp() {
 
@@ -33,22 +31,15 @@ export default function SignUp() {
     e.preventDefault();
 
     try {
-      var user = await Auth.signUp({
+      await signUp({
         username: FormData.name, 
         password: FormData.password,
-        attributes: {
-          email: FormData.email,
-          name: FormData.name,
-          nickname: FormData.name,
-        },
-        autoSignIn: {
-          enabled: true
-        }
-      });
+        });
 
-      await listenToAuthSignInEvent(setConfirmed);
+//     await listenToAuthSignInEvent(setConfirmed);
       setSignedUp('valid');
-
+      router.push('/dashboard');
+      
     } catch (error) {
       setSignedUp('error');
       console.log('error signing up:', error);

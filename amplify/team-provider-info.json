@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "arenac5091224": {},
+        "arena698e57ea": {
+          "userPoolId": "us-east-1_LVnGXfwqq",
+          "userPoolName": "Arena Pool @ Dev",
+          "webClientId": "41lmgig8qp5k237dqf0ikfv713",
+          "nativeClientId": "41lmgig8qp5k237dqf0ikfv713"
+        },
         "arena303e58cf": {
           "userPoolId": "us-east-1_LVnGXfwqq",
           "userPoolName": "Arena Pool @ Dev",

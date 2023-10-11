@@ -1,27 +1,18 @@
+'use client'
 import Link from "next/link";
-import { Amplify, withSSRContext } from 'aws-amplify';
-import { headers } from 'next/headers';
 import { redirect } from "next/navigation";
-import awsExports  from "@/aws-exports";
+import { useAuth } from "../hooks/clientAuth";
 
-Amplify.configure({ ...awsExports, ssr: true });
 
-export default async function Dashboard() {
-
-  const req = {
-    headers: {
-      cookie: headers().get("cookie"),
-    },
-  };
-
-  const { Auth } = withSSRContext({ req });
- 
+export default function Dashboard() {
+  const auth = useAuth();
 
   try {
-    const user = await Auth.currentAuthenticatedUser();
+    const user = auth?.user;
+    console.log(user);
     return (
       <main className="flex min-h-screen flex-col items-center justify-center p-24">
-        <p>This is your dashboard, {user.attributes.name}.</p>
+        <p>This is your dashboard, {user?.username}.</p>
         <Link
           href="/"
           className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
@@ -32,7 +23,7 @@ export default async function Dashboard() {
     );
   } catch (error) {
     console.log(error);
-    redirect("/st-sign-up");
+    redirect("/auth/st-sign-up");
   }
 }
 

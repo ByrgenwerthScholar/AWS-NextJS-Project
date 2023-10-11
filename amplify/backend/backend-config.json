@@ -73,6 +73,38 @@
           "resourceName": "arena303e58cf"
         }
       ]
+    },
+    "AMPLIFY_auth_arena698e57ea_nativeClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "arena698e57ea"
+        }
+      ]
+    },
+    "AMPLIFY_auth_arena698e57ea_userPoolId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "arena698e57ea"
+        }
+      ]
+    },
+    "AMPLIFY_auth_arena698e57ea_userPoolName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "arena698e57ea"
+        }
+      ]
+    },
+    "AMPLIFY_auth_arena698e57ea_webClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "arena698e57ea"
+        }
+      ]
     }
   }
 }
